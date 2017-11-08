@@ -15,7 +15,7 @@ int main() {
     hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
     if (DS4Controller == NULL) {
         fprintf(stderr, "No Dualshock 4 controller connected\n");
-        exit(EXIT_FAILURE);
+        //exit(EXIT_FAILURE);
     }
     puts("Controller Connected.  Type \"help\" for options");
     
@@ -28,26 +28,22 @@ int main() {
         
         // args
         char arg0[6];
-        unsigned char arg1;
-        unsigned char arg2;
-        unsigned char arg3;
+        int arg1 = -1; // don't allow leaving out arguments
+        int arg2 = -1;
+        int arg3 = -1;
         
-        sscanf(inputBuffer, "%s %hhd %hhd %hhd", arg0, &arg1, &arg2, &arg3);
+        sscanf(inputBuffer, "%s %d %d %d", arg0, &arg1, &arg2, &arg3);
         
         if (strcmp(arg0, "help") == 0) {
-            puts("Usage:\n"
+            printf("Usage:\n"
                  "print :                       Read input from controller\n"
-                 "rumble [0-255] [0-255] :      Set left and right rumble motor intensity\n"
-                 "led [0-255] [0-255] [0-255] : Set red, green, blue led values\n"
+                 "%s"
+                 "%s"
                  "send :                        Send features to the controller\n"
-                 "quit :                        Quit DS4Communicator");
-            
+                 "quit :                        Quit DS4Communicator\n", rumbleUsage, ledUsage);
         }
         else if (strcmp(arg0, "print") == 0) {
             printInputReport(DS4Controller);
-        }
-        else if (strcmp(arg0, "send") == 0) {
-            writeOutputReport(DS4Controller, deviceFeatures);
         }
         else if (strcmp(arg0, "rumble") == 0) {
             if (arg1 >= 0 && arg1 <= 255 && arg2 >=0 && arg2 <= 255) {
@@ -55,7 +51,7 @@ int main() {
                 deviceFeatures[1] = arg2;
             }
             else {
-                // handle
+                printf("%s", rumbleUsage);
             }
         }
         else if (strcmp(arg0, "led") == 0) {
@@ -65,10 +61,14 @@ int main() {
                 deviceFeatures[4] = arg3;
             }
             else {
-                // handle
+                printf("%s", ledUsage);
             }
         }
+        else if (strcmp(arg0, "send") == 0) {
+            writeOutputReport(DS4Controller, deviceFeatures);
+        }
         else if (strcmp(arg0, "quit") == 0) {
+            
             exit(EXIT_SUCCESS);
         }
         else {
@@ -84,6 +84,7 @@ int main() {
 }
 
 // handle quitting
+// handle controller being disconnected
 
 /*
  
