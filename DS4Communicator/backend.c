@@ -65,7 +65,7 @@ void printInputReport(hid_device *DS4Controller) {
 }
 
 void handleError() {
-    fprintf(stderr, "An error has occured.  The controller may have been disconnected.");
+    fprintf(stderr, "An error has occured.  The controller may have been disconnected.\n");
     quit(EXIT_FAILURE);
 }
 
