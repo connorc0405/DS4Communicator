@@ -10,8 +10,8 @@
 
 int main() {
     
-    const char rumbleUsage[] = "rumble [0-255] [0-255] :      Set left and right rumble motor intensity\n";
-    const char ledUsage[] =  "led [0-255] [0-255] [0-255] : Set red, green, blue led values\n";
+    const char rumbleUsage[] = "rumble [0-255] [0-255] :      Set left and right rumble motor intensity";
+    const char ledUsage[] =  "led [0-255] [0-255] [0-255] : Set red, green, blue led values";
     
     hid_init();
     hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
@@ -51,7 +51,7 @@ int main() {
                 deviceFeatures[1] = arg2;
             }
             else {
-                printf("%s", rumbleUsage);
+                printf("%s\n", rumbleUsage);
             }
         }
         else if (strcmp(arg0, "led") == 0) {
@@ -61,7 +61,7 @@ int main() {
                 deviceFeatures[4] = arg3;
             }
             else {
-                printf("%s", ledUsage);
+                printf("%s\n", ledUsage);
             }
         }
         else if (strcmp(arg0, "send") == 0) {
