@@ -29,8 +29,8 @@ int main() {
         fgets(inputBuffer, MAX_INPUT_LENGTH, stdin);
         
         // Command arguments
-        char arg0[6];
-        int arg1, arg2, arg3 = -1; // Don't allow leaving out arguments
+        char arg0[7];
+        int arg1 = -1, arg2 = -1, arg3 = -1; // Don't allow leaving out arguments
         sscanf(inputBuffer, "%s %d %d %d", arg0, &arg1, &arg2, &arg3);
         
         // Handle commands
