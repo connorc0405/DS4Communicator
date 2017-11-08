@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "hidapi.h"
 #include "checksum.h"
+#include "main.h"
 
 #define VENDOR_ID 0x054C
 #define PRODUCT_ID 0x05C4
@@ -21,6 +22,8 @@
 void printInputReport(hid_device *DS4Controller);
 
 void writeOutputReport(hid_device *DS4Controller, char* deviceFeatures);
+
+void handleError(void);
 
 void getFeature0x02(hid_device *DS4Controller);
 

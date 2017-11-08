@@ -35,12 +35,16 @@ void writeOutputReport(hid_device *DS4Controller, char* deviceFeatures) {
     outputReportBuf[76] = crc32 >> 16 & 0xFF;
     outputReportBuf[77] = crc32 >> 24;
     
-    hid_write(DS4Controller, outputReportBuf, 78);
+    if (hid_write(DS4Controller, outputReportBuf, 78) == -1) {
+        handleError();
+    }
 }
 
 void printInputReport(hid_device *DS4Controller) {
     unsigned char inputReportBuf[10];
-    hid_read(DS4Controller, inputReportBuf, 10);
+    if (hid_read(DS4Controller, inputReportBuf, 10) == -1) {
+        handleError();
+    }
     printf("Left Stick: (%d, %d)\n", inputReportBuf[1], inputReportBuf[2]);
     printf("Right Stick: (%d, %d)\n", inputReportBuf[3], inputReportBuf[4]);
     printf("DPad: %s\n", dpad[inputReportBuf[5] & 15]);
@@ -58,6 +62,11 @@ void printInputReport(hid_device *DS4Controller) {
     printf("R3: %d\n", (inputReportBuf[6] >> 7) & 1);
     printf("PS: %d\n", inputReportBuf[7] & 1);
     printf("TPAD: %d\n", (inputReportBuf[7] >> 1) & 1);
+}
+
+void handleError() {
+    fprintf(stderr, "An error has occured.  The controller may have been disconnected.");
+    quit();
 }
 
 void getFeature0x02(hid_device *DS4Controller) {

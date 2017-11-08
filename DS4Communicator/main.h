@@ -20,4 +20,6 @@
 const char rumbleUsage[] = "rumble [0-255] [0-255] :      Set left and right rumble motor intensity\n";
 const char ledUsage[] =  "led [0-255] [0-255] [0-255] : Set red, green, blue led values\n";
 
+void quit(void);
+
 #endif

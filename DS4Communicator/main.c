@@ -6,7 +6,6 @@
 //  Copyright © 2017 Connor Cumming. All rights reserved.
 //
 
-
 #include "main.h"
 
 int main() {
@@ -19,21 +18,19 @@ int main() {
     }
     puts("Controller Connected.  Type \"help\" for options");
     
-    char inputBuffer[MAX_INPUT_LENGTH]; // raw user input capped to longest possible command length
+    char inputBuffer[MAX_INPUT_LENGTH]; // Raw user input capped to longest possible command length
     char deviceFeatures[NUM_DS4_CONTROLS]; // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
     
     while(1) {
         printf("> ");
         fgets(inputBuffer, MAX_INPUT_LENGTH, stdin);
         
-        // args
+        // Command arguments
         char arg0[6];
-        int arg1 = -1; // don't allow leaving out arguments
-        int arg2 = -1;
-        int arg3 = -1;
-        
+        int arg1, arg2, arg3 = -1; // Don't allow leaving out arguments
         sscanf(inputBuffer, "%s %d %d %d", arg0, &arg1, &arg2, &arg3);
         
+        // Handle commands
         if (strcmp(arg0, "help") == 0) {
             printf("Usage:\n"
                  "print :                       Read input from controller\n"
@@ -68,14 +65,13 @@ int main() {
             writeOutputReport(DS4Controller, deviceFeatures);
         }
         else if (strcmp(arg0, "quit") == 0) {
-            hid_exit();
-            exit(EXIT_SUCCESS);
+            quit();
         }
         else {
             fprintf(stderr, "Bad input. Type \"help\" for usage commands\n");
         }
         
-        // Clear stdin if necessary
+        // Clear stdin if stdin input is too long for inputBuffer
         if (strchr(inputBuffer, '\n') == NULL) {
             int ch;
             while ((ch = getchar()) != '\n' && ch != EOF);
@@ -83,14 +79,7 @@ int main() {
     }
 }
 
-// handle controller being disconnected
-
-/*
- 
- print
- send
- rumble [0-255] [0-255]
- led [0-255] [0-255] [0-255]
- quit
- 
- */
+void quit() {
+    hid_exit();
+    exit(EXIT_SUCCESS);
+}
