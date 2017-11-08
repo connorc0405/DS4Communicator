@@ -10,11 +10,14 @@
 
 int main() {
     
+    const char rumbleUsage[] = "rumble [0-255] [0-255] :      Set left and right rumble motor intensity\n";
+    const char ledUsage[] =  "led [0-255] [0-255] [0-255] : Set red, green, blue led values\n";
+    
     hid_init();
     hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
     if (DS4Controller == NULL) {
         fprintf(stderr, "No Dualshock 4 controller connected\n");
-        //exit(EXIT_FAILURE);
+        quit(EXIT_FAILURE);
     }
     puts("Controller Connected.  Type \"help\" for options");
     
@@ -65,7 +68,7 @@ int main() {
             writeOutputReport(DS4Controller, deviceFeatures);
         }
         else if (strcmp(arg0, "quit") == 0) {
-            quit();
+            quit(EXIT_SUCCESS);
         }
         else {
             fprintf(stderr, "Bad input. Type \"help\" for usage commands\n");
@@ -79,7 +82,7 @@ int main() {
     }
 }
 
-void quit() {
+void quit(unsigned char status) {
     hid_exit();
-    exit(EXIT_SUCCESS);
+    exit(status);
 }
