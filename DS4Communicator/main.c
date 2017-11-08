@@ -68,7 +68,7 @@ int main() {
             writeOutputReport(DS4Controller, deviceFeatures);
         }
         else if (strcmp(arg0, "quit") == 0) {
-            
+            hid_exit();
             exit(EXIT_SUCCESS);
         }
         else {
@@ -83,7 +83,6 @@ int main() {
     }
 }
 
-// handle quitting
 // handle controller being disconnected
 
 /*
