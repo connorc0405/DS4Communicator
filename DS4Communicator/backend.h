@@ -21,7 +21,7 @@
 
 void printInputReport(hid_device *DS4Controller);
 
-void writeOutputReport(hid_device *DS4Controller, char* deviceFeatures);
+void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures);
 
 void handleError(void);
 

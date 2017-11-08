@@ -22,7 +22,7 @@ int main() {
     puts("Controller Connected.  Type \"help\" for options");
     
     char inputBuffer[MAX_INPUT_LENGTH]; // Raw user input capped to longest possible command length
-    char deviceFeatures[NUM_DS4_CONTROLS]; // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
+    int deviceFeatures[NUM_DS4_CONTROLS] = {0}; // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
     
     while(1) {
         printf("> ");
@@ -36,11 +36,12 @@ int main() {
         // Handle commands
         if (strcmp(arg0, "help") == 0) {
             printf("Usage:\n"
-                 "print :                       Read input from controller\n"
-                 "%s"
-                 "%s"
-                 "send :                        Send features to the controller\n"
-                 "quit :                        Quit DS4Communicator\n", rumbleUsage, ledUsage);
+                   "print :                       Read input from controller\n"
+                   "%s\n"
+                   "%s\n"
+                   "list:                         List set rumble and led values\n"
+                   "send :                        Send features to the controller\n"
+                   "quit :                        Quit DS4Communicator\n", rumbleUsage, ledUsage);
         }
         else if (strcmp(arg0, "print") == 0) {
             printInputReport(DS4Controller);
@@ -63,6 +64,13 @@ int main() {
             else {
                 printf("%s\n", ledUsage);
             }
+        }
+        else if(strcmp(arg0, "list") == 0) {
+            printf("Rumble Left: %d\n"
+                   "Rumble Right: %d\n"
+                   "Led Red: %d\n"
+                   "Led Green: %d\n"
+                   "Led Blue: %d\n", deviceFeatures[0], deviceFeatures[1], deviceFeatures[2], deviceFeatures[3], deviceFeatures[4]);
         }
         else if (strcmp(arg0, "send") == 0) {
             writeOutputReport(DS4Controller, deviceFeatures);
