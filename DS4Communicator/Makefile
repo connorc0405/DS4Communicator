@@ -1,4 +1,4 @@
-$(shell mkdir bin obj)
+$(shell mkdir -p bin obj)
 
 all : main.o backend.o crc32.o
 	$(CC) -o bin/DS4Communicator obj/main.o obj/backend.o obj/crc32.o -lhidapi
@@ -13,4 +13,4 @@ crc32.o : src/crc32.c include/checksum.h
 	$(CC) -o obj/crc32.o -c -Iinclude src/crc32.c
 
 clean:
-	rm obj/* bin/*
+	@rm -f obj/* bin/*
