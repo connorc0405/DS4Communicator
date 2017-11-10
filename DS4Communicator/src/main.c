@@ -22,7 +22,9 @@ int main() {
     puts("Controller Connected.  Type \"help\" for options");
     
     char inputBuffer[MAX_INPUT_LENGTH]; // Raw user input capped to longest possible command length
-    int deviceFeatures[NUM_DS4_CONTROLS] = {0}; // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
+
+    // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
+    int deviceFeatures[NUM_DS4_CONTROLS] = {0};
     
     while(1) {
         printf("> ");
@@ -70,7 +72,12 @@ int main() {
                    "Rumble Right: %d\n"
                    "Led Red: %d\n"
                    "Led Green: %d\n"
-                   "Led Blue: %d\n", deviceFeatures[0], deviceFeatures[1], deviceFeatures[2], deviceFeatures[3], deviceFeatures[4]);
+                   "Led Blue: %d\n",
+                   deviceFeatures[0],
+                   deviceFeatures[1],
+                   deviceFeatures[2],
+                   deviceFeatures[3],
+                   deviceFeatures[4]);
         }
         else if (strcmp(arg0, "send") == 0) {
             writeOutputReport(DS4Controller, deviceFeatures);
