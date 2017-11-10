@@ -13,10 +13,13 @@
 #include <strings.h>
 #include "backend.h"
 
-// Includes null character \0
-#define MAX_INPUT_LENGTH 16
-#define NUM_DS4_CONTROLS 5
+#define MAX_INPUT_LENGTH 16 // Includes null character \0
+#define NUM_DS4_CONTROLS 5 // Rumble (L,R), LED(R, G, B)
 
+/*
+	@desc Free hidapi resources and stop execution
+	@param status: An exit status
+*/
 void quit(unsigned char status);
 
 #endif
