@@ -8,7 +8,7 @@ DS4Communicator relies on [hidapi](https://github.com/signal11/hidapi) which can
   
 Then download and build DS4Communicator  
 `git clone https://github.com/connorc0405/DS4Communicator.git`  
-`cd DS4Communicator`  
+`cd DS4Communicator/DS4Communicator`  
 `make`  
   
 To run:  
