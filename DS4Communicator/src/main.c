@@ -12,6 +12,7 @@ int main() {
     
     const char rumbleUsage[] = "rumble [0-255] [0-255] :      Set left and right rumble motor intensity";
     const char ledUsage[] =  "led [0-255] [0-255] [0-255] : Set red, green, blue led values";
+    char hasWritten = 0;
     
     hid_init();
     hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
@@ -46,7 +47,11 @@ int main() {
                    "quit :                        Quit DS4Communicator\n", rumbleUsage, ledUsage);
         }
         else if (strcmp(arg0, "print") == 0) {
-            printInputReport(DS4Controller);
+            if (hasWritten == 1) {
+                fprintf(stderr, "Cannot print after write. To print again, reconnect the "
+                                "controller and restart DS4Communicator\n");
+            }
+            else printInputReport(DS4Controller);
         }
         else if (strcmp(arg0, "rumble") == 0) {
             if (arg1 >= 0 && arg1 <= 255 && arg2 >=0 && arg2 <= 255) {
@@ -81,6 +86,7 @@ int main() {
         }
         else if (strcmp(arg0, "send") == 0) {
             writeOutputReport(DS4Controller, deviceFeatures);
+            hasWritten = 1;
         }
         else if (strcmp(arg0, "quit") == 0) {
             quit(EXIT_SUCCESS);
