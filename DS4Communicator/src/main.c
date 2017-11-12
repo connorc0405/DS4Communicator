@@ -11,7 +11,7 @@
 int main() {
 
     char hasWritten = 0;
-    
+
     hid_init();
     hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
     if (DS4Controller == NULL) {
@@ -19,21 +19,21 @@ int main() {
         quit(EXIT_FAILURE);
     }
     puts("Controller Connected.  Type \"help\" for options");
-    
+
     char inputBuffer[MAX_INPUT_LENGTH]; // Raw user input capped to longest possible command length
 
     // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
     int deviceFeatures[NUM_DS4_CONTROLS] = {0};
-    
+
     while(1) {
         printf("> ");
         fgets(inputBuffer, MAX_INPUT_LENGTH, stdin);
-        
+
         // Command arguments
-        char arg0[7];
+        char arg0[7] = {0};
         int arg1 = -1, arg2 = -1, arg3 = -1; // Don't allow leaving out arguments
         sscanf(inputBuffer, "%s %d %d %d", arg0, &arg1, &arg2, &arg3);
-        
+
         // Handle commands
         if (strcmp(arg0, "help") == 0) {
             puts("Usage:\n"
@@ -92,7 +92,7 @@ int main() {
         else {
             fprintf(stderr, "Bad input. Type \"help\" for usage commands\n");
         }
-        
+
         // Clear stdin if stdin input is too long for inputBuffer
         if (strchr(inputBuffer, '\n') == NULL) {
             int ch;
