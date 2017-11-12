@@ -4,6 +4,7 @@
 //
 //  Created by Connor Cumming on 10/30/17.
 //  Copyright © 2017 Connor Cumming. All rights reserved.
+//  MIT License
 //
 
 #ifndef backend_h
