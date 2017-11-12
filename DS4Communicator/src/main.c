@@ -40,7 +40,7 @@ int main() {
                    "print :                       Read input from controller\n"
                    "rumble [0-255] [0-255] :      Set left and right rumble motor intensity\n"
                    "led [0-255] [0-255] [0-255] : Set red, green, blue led values\n"
-                   "list:                         List set rumble and led values\n"
+                   "list :                         List set rumble and led values\n"
                    "send :                        Send features to the controller\n"
                    "quit :                        Quit DS4Communicator");
         }
