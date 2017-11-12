@@ -17,8 +17,8 @@
 #define NUM_DS4_CONTROLS 5 // Rumble (L,R), LED(R, G, B)
 
 /*
-	@desc Free hidapi resources and stop execution
-	@param status: An exit status
+    @desc Free hidapi resources and stop execution
+    @param status: An exit status
 */
 void quit(unsigned char status);
 
