@@ -21,8 +21,7 @@ const char* dpad[] = {
 };
 
 void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
-    // take in array that holds values for things like rumble, leds, etc.  array is kept in main.c.
-    // When sent to this function, values are taken from indices of array
+
     unsigned char outputReportBuf[] = {
         0xa2, 0x11, 0xc0, 0x20, 0xf3, 0x04, 0x00,
         deviceFeatures[0],
@@ -38,6 +37,7 @@ void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
     
     uint32_t crc32 = crc_32(outputReportBuf, 75);
     
+    // First byte (0xa2) needed for CRC32 but shouldn't be included in output report
     for (int i = 0; i < sizeof(outputReportBuf); i++) {
         outputReportBuf[i] = outputReportBuf[i+1];
     }
@@ -80,4 +80,3 @@ void handleError() {
     fprintf(stderr, "An error has occured.  The controller may have been disconnected.\n");
     quit(EXIT_FAILURE);
 }
-
