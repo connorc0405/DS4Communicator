@@ -38,7 +38,7 @@ void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
     uint32_t crc32 = crc_32(outputReportBuf, 75);
     
     // First byte (0xa2) needed for CRC32 but shouldn't be included in output report
-    for (int i = 0; i < sizeof(outputReportBuf); i++) {
+    for (int i = 0; i < sizeof(outputReportBuf)-4; i++) {
         outputReportBuf[i] = outputReportBuf[i+1];
     }
     
