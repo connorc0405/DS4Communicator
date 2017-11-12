@@ -58,7 +58,7 @@ int main() {
             }
         }
         else if (strcmp(arg0, "led") == 0) {
-            if (arg2 >= 0 && arg2 <= 255 && arg3 >= 0 && arg3 <= 255) {
+            if (arg1 >= 0 && arg1 <=255 && arg2 >= 0 && arg2 <= 255 && arg3 >= 0 && arg3 <= 255) {
                 deviceFeatures[2] = arg1;
                 deviceFeatures[3] = arg2;
                 deviceFeatures[4] = arg3;
