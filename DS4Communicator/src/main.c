@@ -9,9 +9,7 @@
 #include "main.h"
 
 int main() {
-    
-    const char rumbleUsage[] = "rumble [0-255] [0-255] :      Set left and right rumble motor intensity";
-    const char ledUsage[] =  "led [0-255] [0-255] [0-255] : Set red, green, blue led values";
+
     char hasWritten = 0;
     
     hid_init();
@@ -38,13 +36,13 @@ int main() {
         
         // Handle commands
         if (strcmp(arg0, "help") == 0) {
-            printf("Usage:\n"
+            puts("Usage:\n"
                    "print :                       Read input from controller\n"
-                   "%s\n"
-                   "%s\n"
+                   "rumble [0-255] [0-255] :      Set left and right rumble motor intensity\n"
+                   "led [0-255] [0-255] [0-255] : Set red, green, blue led values\n"
                    "list:                         List set rumble and led values\n"
                    "send :                        Send features to the controller\n"
-                   "quit :                        Quit DS4Communicator\n", rumbleUsage, ledUsage);
+                   "quit :                        Quit DS4Communicator");
         }
         else if (strcmp(arg0, "print") == 0) {
             if (hasWritten == 1) {
@@ -59,7 +57,7 @@ int main() {
                 deviceFeatures[1] = arg2;
             }
             else {
-                printf("%s\n", rumbleUsage);
+                puts("rumble [0-255] [0-255]");
             }
         }
         else if (strcmp(arg0, "led") == 0) {
@@ -69,7 +67,7 @@ int main() {
                 deviceFeatures[4] = arg3;
             }
             else {
-                printf("%s\n", ledUsage);
+                puts("led [0-255] [0-255] [0-255]");
             }
         }
         else if(strcmp(arg0, "list") == 0) {
