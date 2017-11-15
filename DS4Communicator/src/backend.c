@@ -22,7 +22,7 @@ const char* dpad[] = {
 };
 
 void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
-
+    
     unsigned char outputReportBuf[] = {
         0xa2, 0x11, 0xc0, 0x20, 0xf3, 0x04, 0x00,
         deviceFeatures[0],
@@ -54,27 +54,72 @@ void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
 }
 
 void printInputReport(hid_device *DS4Controller) {
-    unsigned char inputReportBuf[10];
-    if (hid_read(DS4Controller, inputReportBuf, 10) == -1) {
-        handleError();
+    initscr();
+    while(1) {
+        unsigned char inputReportBuf[10] = { 0 };
+        if (hid_read(DS4Controller, inputReportBuf, 10) == -1) {
+            handleError();
+        }
+        printw("Left Stick: (%d, %d)\n"
+               "Right Stick: (%d, %d)\n"
+               "DPad: %s\n"
+               "Square: %d\n"
+               "X: %d\n"
+               "Circle: %d\n"
+               "Triangle: %d\n"
+               "L1: %d\n"
+               "Left Trigger: %d%%\n"
+               "R1: %d\n"
+               "Right Trigger: %d%%\n"
+               "Share: %d\n"
+               "Options: %d\n"
+               "L3: %d\n"
+               "R3: %d\n"
+               "PS: %d\n"
+               "TPAD: %d\n",
+               inputReportBuf[1],
+               inputReportBuf[2],
+               inputReportBuf[3],
+               inputReportBuf[4],
+               dpad[inputReportBuf[5] & 15],
+               (inputReportBuf[5] >> 4) & 1,
+               (inputReportBuf[5] >> 5) & 1,
+               (inputReportBuf[5] >> 6) & 1,
+               (inputReportBuf[5] >> 7) & 1,
+               inputReportBuf[6] & 1,
+               (inputReportBuf[8]*100)/255,
+               (inputReportBuf[6] >> 1) & 1,
+               (inputReportBuf[9]*100)/255,
+               (inputReportBuf[6] >> 4) & 1,
+               (inputReportBuf[6] >> 5) & 1,
+               (inputReportBuf[6] >> 6) & 1,
+               (inputReportBuf[6] >> 7) & 1,
+               inputReportBuf[7] & 1,
+               (inputReportBuf[7] >> 1) & 1);
+        refresh();
+        if (getch() != ERR) {
+            break;
+        }
     }
-    printf("Left Stick: (%d, %d)\n", inputReportBuf[1], inputReportBuf[2]);
-    printf("Right Stick: (%d, %d)\n", inputReportBuf[3], inputReportBuf[4]);
-    printf("DPad: %s\n", dpad[inputReportBuf[5] & 15]);
-    printf("Square: %d\n", (inputReportBuf[5] >> 4) & 1);
-    printf("X: %d\n", (inputReportBuf[5] >> 5) & 1);
-    printf("Circle: %d\n", (inputReportBuf[5] >> 6) & 1);
-    printf("Triangle: %d\n", (inputReportBuf[5] >> 7) & 1);
-    printf("L1: %d\n", inputReportBuf[6] & 1);
-    printf("Left Trigger: %d%%\n", (inputReportBuf[8]*100)/255);
-    printf("R1: %d\n", (inputReportBuf[6] >> 1) & 1);
-    printf("Right Trigger: %d%%\n", (inputReportBuf[9]*100)/255);
-    printf("Share: %d\n", (inputReportBuf[6] >> 4) & 1);
-    printf("Options: %d\n", (inputReportBuf[6] >> 5) & 1);
-    printf("L3: %d\n", (inputReportBuf[6] >> 6) & 1);
-    printf("R3: %d\n", (inputReportBuf[6] >> 7) & 1);
-    printf("PS: %d\n", inputReportBuf[7] & 1);
-    printf("TPAD: %d\n", (inputReportBuf[7] >> 1) & 1);
+    endwin();
+    
+    //    printf("Left Stick: (%d, %d)\n", inputReportBuf[1], inputReportBuf[2]);
+    //    printf("Right Stick: (%d, %d)\n", inputReportBuf[3], inputReportBuf[4]);
+    //    printf("DPad: %s\n", dpad[inputReportBuf[5] & 15]);
+    //    printf("Square: %d\n", (inputReportBuf[5] >> 4) & 1);
+    //    printf("X: %d\n", (inputReportBuf[5] >> 5) & 1);
+    //    printf("Circle: %d\n", (inputReportBuf[5] >> 6) & 1);
+    //    printf("Triangle: %d\n", (inputReportBuf[5] >> 7) & 1);
+    //    printf("L1: %d\n", inputReportBuf[6] & 1);
+    //    printf("Left Trigger: %d%%\n", (inputReportBuf[8]*100)/255);
+    //    printf("R1: %d\n", (inputReportBuf[6] >> 1) & 1);
+    //    printf("Right Trigger: %d%%\n", (inputReportBuf[9]*100)/255);
+    //    printf("Share: %d\n", (inputReportBuf[6] >> 4) & 1);
+    //    printf("Options: %d\n", (inputReportBuf[6] >> 5) & 1);
+    //    printf("L3: %d\n", (inputReportBuf[6] >> 6) & 1);
+    //    printf("R3: %d\n", (inputReportBuf[6] >> 7) & 1);
+    //    printf("PS: %d\n", inputReportBuf[7] & 1);
+    //    printf("TPAD: %d\n", (inputReportBuf[7] >> 1) & 1);
 }
 
 void handleError() {
