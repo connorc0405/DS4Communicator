@@ -55,48 +55,54 @@ void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
 
 void printInputReport(hid_device *DS4Controller) {
     initscr();
+    curs_set(0);
     while(1) {
         unsigned char inputReportBuf[10] = { 0 };
         if (hid_read(DS4Controller, inputReportBuf, 10) == -1) {
+            endwin(); 
             handleError();
         }
-        printw("Left Stick: (%d, %d)\n"
-               "Right Stick: (%d, %d)\n"
-               "DPad: %s\n"
-               "Square: %d\n"
-               "X: %d\n"
-               "Circle: %d\n"
-               "Triangle: %d\n"
-               "L1: %d\n"
-               "Left Trigger: %d%%\n"
-               "R1: %d\n"
-               "Right Trigger: %d%%\n"
-               "Share: %d\n"
-               "Options: %d\n"
-               "L3: %d\n"
-               "R3: %d\n"
-               "PS: %d\n"
-               "TPAD: %d\n",
-               inputReportBuf[1],
-               inputReportBuf[2],
-               inputReportBuf[3],
-               inputReportBuf[4],
-               dpad[inputReportBuf[5] & 15],
-               (inputReportBuf[5] >> 4) & 1,
-               (inputReportBuf[5] >> 5) & 1,
-               (inputReportBuf[5] >> 6) & 1,
-               (inputReportBuf[5] >> 7) & 1,
-               inputReportBuf[6] & 1,
-               (inputReportBuf[8]*100)/255,
-               (inputReportBuf[6] >> 1) & 1,
-               (inputReportBuf[9]*100)/255,
-               (inputReportBuf[6] >> 4) & 1,
-               (inputReportBuf[6] >> 5) & 1,
-               (inputReportBuf[6] >> 6) & 1,
-               (inputReportBuf[6] >> 7) & 1,
-               inputReportBuf[7] & 1,
-               (inputReportBuf[7] >> 1) & 1);
+        mvprintw(0,0,
+                 "Left Stick: (%d, %d)\n"
+                 "Right Stick: (%d, %d)\n"
+                 "DPad: %s\n"
+                 "Square: %d\n"
+                 "X: %d\n"
+                 "Circle: %d\n"
+                 "Triangle: %d\n"
+                 "L1: %d\n"
+                 "Left Trigger: %d%%\n"
+                 "R1: %d\n"
+                 "Right Trigger: %d%%\n"
+                 "Share: %d\n"
+                 "Options: %d\n"
+                 "L3: %d\n"
+                 "R3: %d\n"
+                 "PS: %d\n"
+                 "TPAD: %d\n",
+                 inputReportBuf[1],
+                 inputReportBuf[2],
+                 inputReportBuf[3],
+                 inputReportBuf[4],
+                 dpad[inputReportBuf[5] & 15],
+                 (inputReportBuf[5] >> 4) & 1,
+                 (inputReportBuf[5] >> 5) & 1,
+                 (inputReportBuf[5] >> 6) & 1,
+                 (inputReportBuf[5] >> 7) & 1,
+                 inputReportBuf[6] & 1,
+                 (inputReportBuf[8]*100)/255,
+                 (inputReportBuf[6] >> 1) & 1,
+                 (inputReportBuf[9]*100)/255,
+                 (inputReportBuf[6] >> 4) & 1,
+                 (inputReportBuf[6] >> 5) & 1,
+                 (inputReportBuf[6] >> 6) & 1,
+                 (inputReportBuf[6] >> 7) & 1,
+                 inputReportBuf[7] & 1,
+                 (inputReportBuf[7] >> 1) & 1);
         refresh();
+        
+        // Doesn't refresh as fast as it should
+        halfdelay(1);
         if (getch() != ERR) {
             break;
         }
