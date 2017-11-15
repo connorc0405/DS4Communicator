@@ -1,7 +1,7 @@
 $(shell mkdir -p bin obj)
 
 all : main.o backend.o crc32.o
-	$(CC) -o bin/DS4Communicator obj/main.o obj/backend.o obj/crc32.o -lhidapi
+	$(CC) -o bin/DS4Communicator obj/main.o obj/backend.o obj/crc32.o -lhidapi -lncurses
 
 main.o : src/main.c include/main.h /usr/local/include/hidapi/hidapi.h
 	$(CC) -o obj/main.o -c -I/usr/local/include/hidapi -Iinclude/ src/main.c
