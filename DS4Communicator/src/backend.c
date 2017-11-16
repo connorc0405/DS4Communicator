@@ -107,24 +107,6 @@ void printInputReport(hid_device *DS4Controller) {
         }
     }
     endwin();
-    
-    //    printf("Left Stick: (%d, %d)\n", inputReportBuf[1], inputReportBuf[2]);
-    //    printf("Right Stick: (%d, %d)\n", inputReportBuf[3], inputReportBuf[4]);
-    //    printf("DPad: %s\n", dpad[inputReportBuf[5] & 15]);
-    //    printf("Square: %d\n", (inputReportBuf[5] >> 4) & 1);
-    //    printf("X: %d\n", (inputReportBuf[5] >> 5) & 1);
-    //    printf("Circle: %d\n", (inputReportBuf[5] >> 6) & 1);
-    //    printf("Triangle: %d\n", (inputReportBuf[5] >> 7) & 1);
-    //    printf("L1: %d\n", inputReportBuf[6] & 1);
-    //    printf("Left Trigger: %d%%\n", (inputReportBuf[8]*100)/255);
-    //    printf("R1: %d\n", (inputReportBuf[6] >> 1) & 1);
-    //    printf("Right Trigger: %d%%\n", (inputReportBuf[9]*100)/255);
-    //    printf("Share: %d\n", (inputReportBuf[6] >> 4) & 1);
-    //    printf("Options: %d\n", (inputReportBuf[6] >> 5) & 1);
-    //    printf("L3: %d\n", (inputReportBuf[6] >> 6) & 1);
-    //    printf("R3: %d\n", (inputReportBuf[6] >> 7) & 1);
-    //    printf("PS: %d\n", inputReportBuf[7] & 1);
-    //    printf("TPAD: %d\n", (inputReportBuf[7] >> 1) & 1);
 }
 
 void handleError() {
