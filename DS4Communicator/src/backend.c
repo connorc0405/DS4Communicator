@@ -101,8 +101,7 @@ void printInputReport(hid_device *DS4Controller) {
                  (inputReportBuf[7] >> 1) & 1);
         refresh();
         
-        // Doesn't refresh as fast as it should
-        halfdelay(1);
+        timeout(0);
         if (getch() != ERR) {
             break;
         }
