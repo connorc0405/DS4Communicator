@@ -107,6 +107,7 @@ void printInputReport(hid_device *DS4Controller) {
         }
     }
     endwin();
+    setlinebuf(stdout);
 }
 
 void handleError() {
