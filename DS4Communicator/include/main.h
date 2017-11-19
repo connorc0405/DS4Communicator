@@ -14,7 +14,7 @@
 #include <strings.h>
 #include "backend.h"
 
-#define MAX_INPUT_LENGTH 16 // Includes null character \0
+#define MAX_INPUT_LENGTH 17 // Includes newline and null characters
 #define NUM_DS4_CONTROLS 5 // Rumble (L,R), LED(R, G, B)
 
 /*
