@@ -37,7 +37,8 @@ int main() {
 
         // Handle commands
         if (strcmp(arg0, "help") == 0) {
-            puts("Usage:\n"
+            puts("Usage\n"
+                 "------\n"
                    "print :                       Read input from controller\n"
                    "rumble [0-255] [0-255] :      Set left and right rumble motor intensity\n"
                    "led [0-255] [0-255] [0-255] : Set red, green, blue led values\n"
@@ -72,11 +73,11 @@ int main() {
             }
         }
         else if(strcmp(arg0, "list") == 0) {
-            printf("Rumble Left: %d\n"
+            printf("Rumble Left:  %d\n"
                    "Rumble Right: %d\n"
-                   "Led Red: %d\n"
-                   "Led Green: %d\n"
-                   "Led Blue: %d\n",
+                   "Led Red:      %d\n"
+                   "Led Green:    %d\n"
+                   "Led Blue:     %d\n",
                    deviceFeatures[0],
                    deviceFeatures[1],
                    deviceFeatures[2],
