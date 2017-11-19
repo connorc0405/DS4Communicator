@@ -79,7 +79,8 @@ void printInputReport(hid_device *DS4Controller) {
                  "L3: %d\n"
                  "R3: %d\n"
                  "PS: %d\n"
-                 "TPAD: %d\n",
+                 "TPAD: %d\n\n"
+                 "Press any key to exit...",
                  inputReportBuf[1],
                  inputReportBuf[2],
                  inputReportBuf[3],
