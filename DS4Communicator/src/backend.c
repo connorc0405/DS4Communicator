@@ -56,10 +56,11 @@ void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
 void printInputReport(hid_device *DS4Controller) {
     initscr();
     curs_set(0);
+    noecho();
     while(1) {
         unsigned char inputReportBuf[10] = { 0 };
         if (hid_read(DS4Controller, inputReportBuf, 10) == -1) {
-            endwin(); 
+            endwin();
             handleError();
         }
         mvprintw(0,0,
