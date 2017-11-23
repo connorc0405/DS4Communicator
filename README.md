@@ -25,7 +25,14 @@ or
 `led [0-255] [0-255] [0-255]` : Set red, green, and blue values for the LED, respectively  
 `list` : Get last updated rumble and LED values  
 `send` : Send an output report to set rumble and LED function  
-`quit` : Stop DS4Communicator  
+`quit` : Stop DS4Communicator 
+
+<p float="left">
+  <img src="https://connorc0405.github.io/DS4Communicator/images/print_mode.png" width="49%" />
+  <img src="https://connorc0405.github.io/DS4Communicator/images/send_function.png" width="49%" />
+</p>
+
+
 
 ## Issues
 The Dualshock 4 does not include one of its input reports in the HID report descriptor, which is sent after an output report has been written.  Because of this, input reports cannot be received after an output report is written, until:
