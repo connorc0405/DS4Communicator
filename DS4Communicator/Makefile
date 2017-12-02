@@ -1,16 +1,16 @@
 $(shell mkdir -p bin obj)
 
-all : main.o backend.o crc32.o
-	$(CC) -o bin/DS4Communicator obj/main.o obj/backend.o obj/crc32.o -lhidapi -lncurses
+SRC = $(wildcard src/*.c)
+OBJ = $(patsubst src/%.c, obj/%.o, $(SRC))
 
-main.o : src/main.c
-	$(CC) -o obj/main.o -c -I/usr/local/include/hidapi -Iinclude/ src/main.c
+INCLUDES = -Iinclude/ -I/usr/local/include/hidapi
+LIBS = -lhidapi -lncurses
 
-backend.o : src/backend.c
-	$(CC) -o obj/backend.o -c -I/usr/local/include/hidapi -Iinclude/ src/backend.c
+all : $(OBJ)
+	$(CC) -o bin/DS4Communicator $(OBJ) $(LIBS)
 
-crc32.o : src/crc32.c
-	$(CC) -o obj/crc32.o -c -Iinclude/ src/crc32.c
+obj/%.o: src/%.c
+	$(CC) -c $(INCLUDES) $< -o $@
 
 clean:
 	@rm -f obj/* bin/*
