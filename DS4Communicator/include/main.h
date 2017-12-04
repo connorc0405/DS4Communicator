@@ -19,8 +19,8 @@
 
 /*
     @desc Free hidapi resources and stop execution
-    @param status: An exit status
+    @param code: An exit code
 */
-void quit(unsigned char status);
+void quit(signed char code);
 
 #endif

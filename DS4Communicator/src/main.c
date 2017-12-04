@@ -103,7 +103,7 @@ int main() {
     }
 }
 
-void quit(unsigned char status) {
+void quit(signed char code) {
     hid_exit();
-    exit(status);
+    exit(code);
 }
