@@ -9,7 +9,7 @@
 
 #include "backend.h"
 
-const char *dpad[] = {
+const char *DPAD[] = {
     [0] = "N",
     [1] = "NE",
     [2] = "E",
@@ -86,7 +86,7 @@ void printInputReport(hid_device *DS4Controller) {
                  inputReportBuf[2],
                  inputReportBuf[3],
                  inputReportBuf[4],
-                 dpad[inputReportBuf[5] & 15],
+                 DPAD[inputReportBuf[5] & 15],
                  (inputReportBuf[5] >> 4) & 1,
                  (inputReportBuf[5] >> 5) & 1,
                  (inputReportBuf[5] >> 6) & 1,
