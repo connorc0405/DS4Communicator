@@ -14,10 +14,10 @@ Download and build DS4Communicator:
 `make`  
   
 To run:  
-`./bin/DS4Communicator`  
+`./bin/ds4communicator`  
 or  
 `cd bin`  
-`./DS4Communicator`  
+`./ds4communicator`  
 
 ## Usage
 `print` : Read input data from the controller  

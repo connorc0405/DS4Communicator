@@ -7,7 +7,7 @@ INCLUDES = -Iinclude/ -I/usr/local/include/hidapi
 LIBS = -lhidapi -lncurses
 
 all : $(OBJ)
-	$(CC) -o bin/DS4Communicator $(OBJ) $(LIBS)
+	$(CC) -o bin/ds4communicator $(OBJ) $(LIBS)
 
 obj/%.o: src/%.c
 	$(CC) -c $(INCLUDES) $< -o $@
