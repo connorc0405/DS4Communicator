@@ -9,7 +9,7 @@
 
 #include "backend.h"
 
-const char* dpad[] = {
+const char *dpad[] = {
     [0] = "N",
     [1] = "NE",
     [2] = "E",
@@ -21,8 +21,8 @@ const char* dpad[] = {
     [8] = "None"
 };
 
-void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
-    
+void writeOutputReport(hid_device *DS4Controller, int *deviceFeatures) {
+
     unsigned char outputReportBuf[] = {
         0xa2, 0x11, 0xc0, 0x20, 0xf3, 0x04, 0x00,
         deviceFeatures[0],
@@ -35,19 +35,19 @@ void writeOutputReport(hid_device *DS4Controller, int* deviceFeatures) {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0, 0, 0 };
-    
+
     uint32_t crc32 = crc_32(outputReportBuf, 75);
-    
+
     // First byte (0xa2) needed for CRC32 but shouldn't be included in output report
     for (int i = 0; i < sizeof(outputReportBuf)-4; i++) {
         outputReportBuf[i] = outputReportBuf[i+1];
     }
-    
+
     outputReportBuf[74] = crc32 & 0xFF;
     outputReportBuf[75] = crc32 >> 8 & 0xFF;
     outputReportBuf[76] = crc32 >> 16 & 0xFF;
     outputReportBuf[77] = crc32 >> 24;
-    
+
     if (hid_write(DS4Controller, outputReportBuf, 78) == -1) {
         handleError();
     }
@@ -102,7 +102,6 @@ void printInputReport(hid_device *DS4Controller) {
                  inputReportBuf[7] & 1,
                  (inputReportBuf[7] >> 1) & 1);
         refresh();
-        
         timeout(0);
         if (getch() != ERR) {
             break;
