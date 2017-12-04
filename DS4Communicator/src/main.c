@@ -16,7 +16,7 @@ int main() {
     hid_init();
     hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
     if (DS4Controller == NULL) {
-        fprintf(stderr, "No Dualshock 4 controller connected\n");
+        fprintf(stderr, "ds4communicator: No Dualshock 4 controller connected\n");
         quit(EXIT_FAILURE);
     }
     puts("Controller Connected.  Type \"help\" for options");
