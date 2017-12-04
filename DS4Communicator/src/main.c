@@ -48,8 +48,8 @@ int main() {
         }
         else if (strcmp(arg0, "print") == 0) {
             if (hasWritten == 1) {
-                fprintf(stderr, "Cannot print after write. To print again, reconnect the "
-                                "controller and restart DS4Communicator\n");
+                puts("Cannot print after write. To print again, reconnect the "
+                     "controller and restart DS4Communicator\n");
             }
             else printInputReport(DS4Controller);
         }
@@ -92,7 +92,7 @@ int main() {
             quit(EXIT_SUCCESS);
         }
         else {
-            fprintf(stderr, "Bad input. Type \"help\" for usage commands\n");
+            puts("Bad input. Type \"help\" for usage commands\n");
         }
 
         // Clear stdin if stdin input is too long for inputBuffer
