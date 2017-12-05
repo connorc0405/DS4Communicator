@@ -49,7 +49,7 @@ void writeOutputReport(hid_device *DS4Controller, int *deviceFeatures) {
     outputReportBuf[77] = crc32 >> 24;
 
     if (hid_write(DS4Controller, outputReportBuf, 78) == -1) {
-        handleError();
+        quit(-1);
     }
 }
 
@@ -61,7 +61,7 @@ void printInputReport(hid_device *DS4Controller) {
         unsigned char inputReportBuf[10] = { 0 };
         if (hid_read(DS4Controller, inputReportBuf, 10) == -1) {
             endwin();
-            handleError();
+            quit(-1);
         }
         mvprintw(0,0,
                  "Left Stick: (%d, %d)\n"
@@ -111,12 +111,10 @@ void printInputReport(hid_device *DS4Controller) {
     setlinebuf(stdout);
 }
 
-void handleError() {
-    fprintf(stderr, "An error has occured.  The controller may have been disconnected.\n");
-    quit(EXIT_FAILURE);
-}
-
 void quit(signed char code) {
+    if (code != 0) {
+        printf("ds4communicator: Error: %d.  The controller may not be connected.\n", code);
+    }
     hid_exit();
     exit(code);
 }

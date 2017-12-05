@@ -37,14 +37,9 @@ void printInputReport(hid_device *DS4Controller);
 void writeOutputReport(hid_device *DS4Controller, int *deviceFeatures);
 
 /*
-    @desc Notify the user that a failure has occured and quit DS4Communicator
-*/
-void handleError(void);
-
-/*
     @desc Free hidapi resources and stop execution
     @param code: An exit code
 */
-void quit(signed char code); 
+void quit(signed char code);
 
 #endif
