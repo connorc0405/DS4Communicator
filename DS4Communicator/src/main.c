@@ -13,8 +13,6 @@
 
 int main(void) {
 
-    char hasWritten = 0;
-
     hid_init();
     hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
     if (DS4Controller == NULL) {
@@ -22,18 +20,24 @@ int main(void) {
     }
     puts("Controller Connected.  Type \"help\" for options.");
 
-    char inputBuffer[MAX_INPUT_LENGTH]; // Raw user input capped to longest possible command length
-
+    // Used to prevent reading after writing
+    char hasWritten = 0;
+    // Raw user input capped to longest possible command length
+    char inputBuffer[MAX_INPUT_LENGTH];
     // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
     int deviceFeatures[NUM_DS4_CONTROLS] = {0};
+    // First argument
+    char arg0[7] = {0};
+    // 2nd, 3rd, 4th arguments
+    int arg1, arg2, arg3;
 
     while(1) {
         printf("> ");
         fgets(inputBuffer, MAX_INPUT_LENGTH, stdin);
 
-        // Command arguments
-        char arg0[7] = {0};
-        int arg1 = -1, arg2 = -1, arg3 = -1; // Don't allow leaving out arguments
+        // Don't allow leaving out arguments
+        arg1 = -1; arg2 = -1; arg3 = -1;
+
         sscanf(inputBuffer, "%s %d %d %d", arg0, &arg1, &arg2, &arg3);
 
         // Handle commands
@@ -101,5 +105,7 @@ int main(void) {
             int ch;
             while ((ch = getchar()) != '\n' && ch != EOF);
         }
+        // Cheap way to "clear" first argument
+        arg0[0] = '\0';
     }
 }
