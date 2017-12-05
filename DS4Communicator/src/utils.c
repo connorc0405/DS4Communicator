@@ -1,5 +1,5 @@
 //
-//  backend.c
+//  utils.c
 //  DS4Communicator
 //
 //  Created by Connor Cumming on 10/24/17.
@@ -7,7 +7,7 @@
 //  MIT License
 //
 
-#include "backend.h"
+#include "utils.h"
 
 const char *DPAD[] = {
     [0] = "N",
@@ -114,4 +114,9 @@ void printInputReport(hid_device *DS4Controller) {
 void handleError() {
     fprintf(stderr, "An error has occured.  The controller may have been disconnected.\n");
     quit(EXIT_FAILURE);
+}
+
+void quit(signed char code) {
+    hid_exit();
+    exit(code);
 }
