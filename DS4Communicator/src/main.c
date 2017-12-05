@@ -7,7 +7,9 @@
 //  MIT License
 //
 
-#include "main.h"
+#include <string.h>
+
+#include "utils.h"
 
 int main() {
 
@@ -101,9 +103,4 @@ int main() {
             while ((ch = getchar()) != '\n' && ch != EOF);
         }
     }
-}
-
-void quit(signed char code) {
-    hid_exit();
-    exit(code);
 }
