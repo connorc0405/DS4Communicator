@@ -11,7 +11,7 @@
 
 #include "utils.h"
 
-int main() {
+int main(void) {
 
     char hasWritten = 0;
 
