@@ -21,7 +21,7 @@ int main(void) {
         fprintf(stderr, "ds4communicator: No Dualshock 4 controller connected\n");
         quit(EXIT_FAILURE);
     }
-    puts("Controller Connected.  Type \"help\" for options");
+    puts("Controller Connected.  Type \"help\" for options.");
 
     char inputBuffer[MAX_INPUT_LENGTH]; // Raw user input capped to longest possible command length
 
@@ -51,7 +51,7 @@ int main(void) {
         else if (strcmp(arg0, "print") == 0) {
             if (hasWritten == 1) {
                 puts("Cannot print after write. To print again, reconnect the "
-                     "controller and restart DS4Communicator\n");
+                     "controller and restart DS4Communicator.");
             }
             else printInputReport(DS4Controller);
         }
