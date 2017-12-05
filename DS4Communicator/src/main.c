@@ -35,7 +35,7 @@ int main(void) {
         printf("> ");
         fgets(inputBuffer, MAX_INPUT_LENGTH, stdin);
 
-        // Don't allow leaving out arguments
+        // Prevent arguments from being omitted
         arg1 = -1; arg2 = -1; arg3 = -1;
 
         sscanf(inputBuffer, "%s %d %d %d", arg0, &arg1, &arg2, &arg3);
