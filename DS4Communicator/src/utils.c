@@ -9,6 +9,7 @@
 
 #include "utils.h"
 
+// Map DPad value to direction 
 const char *DPAD[] = {
     [0] = "N",
     [1] = "NE",
@@ -23,6 +24,7 @@ const char *DPAD[] = {
 
 void writeOutputReport(hid_device *DS4Controller, int *deviceFeatures) {
 
+    // Set desired feature values
     unsigned char outputReportBuf[] = {
         0xa2, 0x11, 0xc0, 0x20, 0xf3, 0x04, 0x00,
         deviceFeatures[0],
@@ -34,15 +36,19 @@ void writeOutputReport(hid_device *DS4Controller, int *deviceFeatures) {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0, 0, 0 };
+        0x00, 0x00, 0x00, 0, 0, 0
+    };
 
+    // CRC32 checksum for BT validation
     uint32_t crc32 = crc_32(outputReportBuf, 75);
 
-    // First byte (0xa2) needed for CRC32 but shouldn't be included in output report
+    // First byte (0xa2) is needed for a correct CRC32 calculation,
+    // but is added when the output report is sent.  So, remove it for now.
     for (int i = 0; i < sizeof(outputReportBuf)-4; i++) {
         outputReportBuf[i] = outputReportBuf[i+1];
     }
 
+    // CRC32 bytes go in outputReportBuf in reverse order
     outputReportBuf[74] = crc32 & 0xFF;
     outputReportBuf[75] = crc32 >> 8 & 0xFF;
     outputReportBuf[76] = crc32 >> 16 & 0xFF;
@@ -54,9 +60,12 @@ void writeOutputReport(hid_device *DS4Controller, int *deviceFeatures) {
 }
 
 void printInputReport(hid_device *DS4Controller) {
+
     initscr();
     curs_set(0);
+    // Don't print the key used to exit the window
     noecho();
+
     while(1) {
         unsigned char inputReportBuf[10] = { 0 };
         if (hid_read(DS4Controller, inputReportBuf, 10) == -1) {
@@ -102,12 +111,14 @@ void printInputReport(hid_device *DS4Controller) {
                  inputReportBuf[7] & 1,
                  (inputReportBuf[7] >> 1) & 1);
         refresh();
+        // Don't block the main thread while awaiting input
         timeout(0);
         if (getch() != ERR) {
             break;
         }
     }
     endwin();
+    // Revert block-buffering by ncurses
     setlinebuf(stdout);
 }
 
@@ -115,6 +126,7 @@ void quit(signed char code) {
     if (code != 0) {
         printf("ds4communicator: Error: %d.  The controller may not be connected.\n", code);
     }
+    // Free resources
     hid_exit();
     exit(code);
 }
