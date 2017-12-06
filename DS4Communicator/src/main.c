@@ -115,7 +115,7 @@ int main(void) {
             quit(0);
         }
         else {
-            puts("Bad input. Type \"help\" for usage commands\n");
+            puts("Bad input. Type \"help\" for usage commands");
         }
 
         // Clear stdin if input is longer than the size of inputBuffer
