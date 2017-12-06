@@ -14,20 +14,38 @@
 int main(void) {
 
     hid_init();
-    hid_device *DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID, NULL);
-    if (DS4Controller == NULL) {
+    hid_device *DS4Controller = NULL;
+    struct hid_device_info *deviceFound = hid_enumerate(VENDOR_ID, 0);
+
+    // Connect to the appropriate device
+    while (deviceFound) {
+        if (deviceFound->product_id == PRODUCT_ID_1) {
+            DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID_1, NULL);
+            break;
+        }
+        else if (deviceFound->product_id == PRODUCT_ID_2) {
+            DS4Controller = hid_open(VENDOR_ID, PRODUCT_ID_2, NULL);
+            break;
+        }
+        else deviceFound = deviceFound->next;
+    }
+    if (!DS4Controller) {
         quit(-1);
     }
     puts("Controller Connected.  Type \"help\" for options.");
 
     // Used to prevent reading after writing
     char hasWritten = 0;
+
     // Raw user input capped to longest possible command length
     char inputBuffer[MAX_INPUT_LENGTH];
+
     // [0] = rumbleL, [1] = rumbleR, [2] = ledR, [3] = ledG, [4] = ledB
     int deviceFeatures[NUM_DS4_CONTROLS] = {0};
+
     // First argument
     char arg0[7] = {0};
+
     // 2nd, 3rd, 4th arguments
     int arg1, arg2, arg3;
 

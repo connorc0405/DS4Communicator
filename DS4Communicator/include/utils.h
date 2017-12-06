@@ -19,7 +19,8 @@
 #include "hidapi.h"
 
 #define VENDOR_ID 0x054C
-#define PRODUCT_ID 0x05C4
+#define PRODUCT_ID_1 0x05C4
+#define PRODUCT_ID_2 0x09CC
 #define MAX_INPUT_LENGTH 17 // Includes newline and null characters
 #define NUM_DS4_CONTROLS 5 // Rumble (L,R), LED(R, G, B)
 
