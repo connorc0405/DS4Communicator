@@ -5,7 +5,7 @@ DS4Communicator is an interactive command-line program for Mac that allows users
 
 ## Requirements
 DS4Communicator relies on [hidapi](https://github.com/signal11/hidapi) which can be installed using [homebrew](https://brew.sh) with `brew install hidapi`    
-The controller must be paired with the Mac over Bluetooth **before** DS4Communicator is executed
+The controller must be paired with the Mac over Bluetooth **before** DS4Communicator is executed.
 
 ## Compile from Source
 Download and build DS4Communicator:  
@@ -15,9 +15,6 @@ Download and build DS4Communicator:
   
 To run:  
 `./bin/ds4communicator`  
-or  
-`cd bin`  
-`./ds4communicator`  
 
 ## Usage
 `print` : Read input data from the controller  
