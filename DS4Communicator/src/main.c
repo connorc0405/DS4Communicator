@@ -40,7 +40,7 @@ int main(void) {
 
         sscanf(inputBuffer, "%s %d %d %d", arg0, &arg1, &arg2, &arg3);
 
-        // Handle commands
+        // Handle arguments
         if (strcmp(arg0, "help") == 0) {
             puts("Usage\n"
                  "------\n"
@@ -100,7 +100,7 @@ int main(void) {
             puts("Bad input. Type \"help\" for usage commands\n");
         }
 
-        // Clear stdin if stdin input is too long for inputBuffer
+        // Clear stdin if input is longer than the size of inputBuffer
         if (strchr(inputBuffer, '\n') == NULL) {
             int ch;
             while ((ch = getchar()) != '\n' && ch != EOF);
