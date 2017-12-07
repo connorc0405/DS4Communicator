@@ -25,8 +25,8 @@ To run:
 `quit` : Stop DS4Communicator 
 
 <p float="left">
-  <img src="https://drive.google.com/uc?id=1oJBTqSS5iD2vak7uP2KX-4MRhF_LH3GH" width="49%" />
   <img src="http://drive.google.com/uc?id=1HZVc2HjB9ZK3LC3wGVGhT-d8exfgLDVW" width="49%" />
+  <img src="https://drive.google.com/uc?id=1oJBTqSS5iD2vak7uP2KX-4MRhF_LH3GH" width="49%" />
 </p>
 
 
