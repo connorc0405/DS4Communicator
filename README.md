@@ -1,4 +1,4 @@
-<img src="https://connorc0405.github.io/DS4Communicator/images/ds4_light_bar.svg?sanitize=true" width="50%" align="right">
+<img src="https://drive.google.com/uc?id=10-sjP81T_6SVIya-CPMQK34KVSObzr8U" width="50%" align="right">
 
 ## Description
 DS4Communicator is an interactive command-line program for Mac that allows users to communicate with a Dualshock 4 controller over Bluetooth.  It can read input data from the controller as well as control the two rumble motors and set RGB values for the LED.
@@ -25,8 +25,8 @@ To run:
 `quit` : Stop DS4Communicator 
 
 <p float="left">
-  <img src="https://connorc0405.github.io/DS4Communicator/images/print_mode.png" width="49%" />
-  <img src="https://connorc0405.github.io/DS4Communicator/images/send_function.png" width="49%" />
+  <img src="https://drive.google.com/uc?id=1oJBTqSS5iD2vak7uP2KX-4MRhF_LH3GH" width="49%" />
+  <img src="http://drive.google.com/uc?id=1NErpA6NlMM1sa5EEdndpjHHsfvOi13qx" width="49%" />
 </p>
 
 
