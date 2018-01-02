@@ -8,7 +8,6 @@
 //
 
 #include <string.h>
-
 #include "utils.h"
 
 int main(void) {
