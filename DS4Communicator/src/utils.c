@@ -9,7 +9,7 @@
 
 #include "utils.h"
 
-// Map DPad value to direction 
+// Map DPad value to direction
 const char *DPAD[] = {
     [0] = "N",
     [1] = "NE",
@@ -48,7 +48,7 @@ void writeOutputReport(hid_device *DS4Controller, int *deviceFeatures) {
         outputReportBuf[i] = outputReportBuf[i+1];
     }
 
-    // CRC32 bytes go in outputReportBuf in reverse order
+    // Need to reverse bytes, likely for network byte ordering
     outputReportBuf[74] = crc32 & 0xFF;
     outputReportBuf[75] = crc32 >> 8 & 0xFF;
     outputReportBuf[76] = crc32 >> 16 & 0xFF;
