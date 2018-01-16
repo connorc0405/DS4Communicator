@@ -1,11 +1,12 @@
 <img src="https://drive.google.com/uc?id=10-sjP81T_6SVIya-CPMQK34KVSObzr8U" width="50%" align="right">
 
 ## Description
-DS4Communicator is an interactive command-line program for Mac that allows users to communicate with a Dualshock 4 controller over Bluetooth.  It can read input data from the controller as well as control the two rumble motors and set RGB values for the LED.
+DS4Communicator is an interactive command-line program that allows users to communicate with a Dualshock 4 controller over Bluetooth.  It can read input data from the controller as well as control the two rumble motors and set RGB values for the LED.
 
 ## Requirements
-DS4Communicator relies on [hidapi](https://github.com/signal11/hidapi) which can be installed using [homebrew](https://brew.sh) with `brew install hidapi`    
-The controller must be paired with the Mac over Bluetooth **before** DS4Communicator is executed.
+DS4Communicator relies on [hidapi](https://github.com/signal11/hidapi). It can be built from source on all major OSs or installed on
+* MacOS using [homebrew](https://brew.sh): `brew install hidapi`
+* GNU/Linux with package manager
 
 ## Compile from Source
 Download and build DS4Communicator:  
@@ -17,6 +18,7 @@ To run:
 `./bin/ds4communicator`  
 
 ## Usage
+Note: The controller must be paired with the computer over Bluetooth **before** DS4Communicator is executed    
 `print` : Read input data from the controller  
 `rumble [0-255] [0-255]` : Set rumble intensity for left and right motors, respectively  
 `led [0-255] [0-255] [0-255]` : Set red, green, and blue values for the LED, respectively  
