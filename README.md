@@ -17,9 +17,9 @@ Download and build DS4Communicator:
 To run:  
 `./bin/ds4communicator`  
 
-## Usage
 Note: The controller must be paired with the computer over Bluetooth **before** DS4Communicator is executed
 
+## Usage
 `print` : Read input data from the controller  
 `rumble [0-255] [0-255]` : Set rumble intensity for left and right motors, respectively  
 `led [0-255] [0-255] [0-255]` : Set red, green, and blue values for the LED, respectively  
