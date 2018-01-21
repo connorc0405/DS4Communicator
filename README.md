@@ -32,10 +32,10 @@ Note: The controller must be paired with the computer over Bluetooth **before** 
   <img src="https://drive.google.com/uc?id=1oJBTqSS5iD2vak7uP2KX-4MRhF_LH3GH" width="49%" />
 </p>
 
-
-
 ## Issues
-The Dualshock 4 does not include one of its input reports in the HID report descriptor, which is sent after an output report has been written.  Because of this, input reports cannot be received after an output report is written, until:
+1. The Dualshock 4 does not include one of its input reports in the HID report descriptor, which is sent after an output report has been written.  Because of this, input reports cannot be received after an output report is written, until:
 * Dualshock 4 controller is disconnected
 * Dualshock 4 is reconnected
 * DS4Communicator is restarted
+
+2. DS4Communicator has only been tested on MacOS.  File an issue if it is broken on other platforms.
